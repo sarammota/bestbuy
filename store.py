@@ -1,5 +1,6 @@
 import products
 
+
 class Store:
     def __init__(self, product_list):
         self.store = product_list
@@ -13,7 +14,8 @@ class Store:
         return self.store
 
     def get_total_quantity(self) -> int:
-        total_quantity = sum(product.get_quantity() for product in self.store)
+        total_quantity = sum(
+            product.get_quantity() for product in self.store if not isinstance(product, products.NonStockedProduct))
         return total_quantity
 
     def get_all_products(self) -> [products.Product]:
@@ -24,3 +26,4 @@ class Store:
         for product, quantity in shopping_list:
             total_price += product.buy(quantity)
         return total_price
+
